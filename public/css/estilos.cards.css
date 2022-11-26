@@ -61,9 +61,6 @@
 
 /*tarjeta 5*/
 .card-header-sixth {
-    /* box-shadow: 1px 7px 15px #a2a2a2;
-    margin: -25px -25px 0px -25px;
-    height: 120px; */
     margin-top: -40px;
     height: 120px;
     background: linear-gradient(-90deg, #36914d, #358a0a);
@@ -71,7 +68,7 @@
 
 }
 
-/* .card-header-title {
+.card-header-title {
     font-family: Roboto;
-    font-size: 18px;
-} */
+    font-size: 25px;
+}
