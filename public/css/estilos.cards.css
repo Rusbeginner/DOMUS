@@ -1,0 +1,77 @@
+
+.principal {
+    margin-top: 50px;
+    font-family: 'Roboto';
+    font-size: small;
+}
+
+
+/*tarjeta 1*/
+.card-header-first {
+    margin-top: -40px;
+    height: 120px;
+    background: linear-gradient(-90deg, #BF019F, #F28A57);
+    box-shadow: 1px 5px 15px #a2a2a2;
+    
+}
+
+/*tarjeta 2*/
+.card-header-second {
+    /* box-shadow: 1px 7px 15px #a2a2a2;
+    margin: -25px -25px 0px -25px;
+    height: 120px; */
+    margin-top: -40px;
+    height: 120px;
+    background: linear-gradient(-90deg, #8E2DE2, #4A00E0);
+    box-shadow: 1px 5px 15px #a2a2a2;
+
+}
+
+/*tarjeta 3*/
+.card-header-third {
+    /* margin-top: -25px; */
+    margin-top: -40px;
+    height: 120px;
+    background: linear-gradient(-90deg, #11998e, #38ef7d);
+    box-shadow: 1px 5px 15px #a2a2a2;
+    
+}
+
+/*tarjeta 4*/
+.card-header-fourth {
+    /* margin-top: -25px; */
+    margin-top: -40px;
+    height: 120px;
+    background: linear-gradient(-90deg, #cc668b, #e5c63b);
+    box-shadow: 1px 5px 15px #a2a2a2;
+
+}
+
+/*tarjeta 5*/
+.card-header-fifth {
+    /* box-shadow: 1px 7px 15px #a2a2a2;
+    margin: -25px -25px 0px -25px;
+    height: 120px; */
+    margin-top: -40px;
+    height: 120px;
+    background: linear-gradient(-90deg, #663691, #340a8a);
+    box-shadow: 1px 5px 15px #a2a2a2;
+
+}
+
+/*tarjeta 5*/
+.card-header-sixth {
+    /* box-shadow: 1px 7px 15px #a2a2a2;
+    margin: -25px -25px 0px -25px;
+    height: 120px; */
+    margin-top: -40px;
+    height: 120px;
+    background: linear-gradient(-90deg, #36914d, #358a0a);
+    box-shadow: 1px 5px 15px #a2a2a2;
+
+}
+
+/* .card-header-title {
+    font-family: Roboto;
+    font-size: 18px;
+} */
