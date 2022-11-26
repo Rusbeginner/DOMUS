@@ -119,9 +119,23 @@ class TipolubricanteController extends AppBaseController
             return redirect(route('tipolubricantes.index'));
         }
 
-        $this->tipolubricanteRepository->delete($id);
+        //chequear si hay algun lubricante asociado 
 
-        Alert::success('Operación realizada con éxito', 'Tipo de lubricante eliminado satisfactoriamente');
+        $lubricantes = $tipolubricante->lubricantes;
+
+        if ($lubricantes->count() > 0)
+        {
+            Alert::warning('No se puede eliminar', 'Existe lubricante asociado');
+        }
+        else
+        {
+             $this->tipolubricanteRepository->delete($id);
+
+             Alert::success('Operación realizada con éxito', 'Tipo de lubricante eliminado satisfactoriamente');
+        }
+        
+
+       
 
         return redirect(route('tipolubricantes.index'));
     }

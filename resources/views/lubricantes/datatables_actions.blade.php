@@ -6,7 +6,8 @@
     </a>
     {!! Form::button('<i class="fa fa-trash"></i> <small>Eliminar</small>', [
     'type' => 'submit',
-    'class' => 'btn btn-danger btn-xs'
+    'class' => 'btn btn-danger btn-xs',
+    'onclick' => 'return confirm("Confirma que desea eliminar el registro?")'
 
     ]) !!}
 </div>

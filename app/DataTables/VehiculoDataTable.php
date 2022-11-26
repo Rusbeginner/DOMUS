@@ -78,7 +78,11 @@ class VehiculoDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id',
+            'id' => new \Yajra\DataTables\Html\Column([
+                'title' => 'No.',
+                'data' => 'id',
+                'name' => 'id'
+            ]),
             'tipoequipo_id' => new \Yajra\DataTables\Html\Column([
                 'title' => 'Tipo de vehículo',
                 'data' => 'tipoequipo.tipo',

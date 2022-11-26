@@ -27,7 +27,7 @@ class Tipolubricante extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function lubricantes(): HasMany
+    public function lubricantes()
     {
         return $this->hasMany(Lubricante::class);
     }

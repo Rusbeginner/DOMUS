@@ -9,19 +9,10 @@
     {!! Form::button('<i class="fa fa-trash"></i> <small>Eliminar</small>', [
     'type' => 'submit',
     'class' => 'btn btn-danger btn-xs',
-    'onclick' => 'ejecutar()'
+    'onclick' => 'return confirm("Confirma que desea eliminar el registro?")'
 
     ]) !!}
 </div>
 
 {!! Form::close() !!}
 
-<script type="text/javascript">
-    function ejecutar() {
-        $('#form-eliminar').click(function(e) {
-            e.preventDefault();
-            alert('eliminand0');
-
-        });
-
-</script>

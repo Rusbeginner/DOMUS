@@ -60,7 +60,7 @@ class ChoferController extends AppBaseController
         $chofer = $this->choferRepository->find($id);
 
         if (empty($chofer)) {
-            Flash::error('Chofer not found');
+            Alert::info('Registro no encontrado', 'No existe el chofer');
 
             return redirect(route('chofers.index'));
         }
@@ -76,7 +76,7 @@ class ChoferController extends AppBaseController
         $chofer = $this->choferRepository->find($id);
 
         if (empty($chofer)) {
-            Flash::error('Chofer not found');
+            Alert::info('Registro no encontrado', 'No existe el chofer');
 
             return redirect(route('chofers.index'));
         }
@@ -92,7 +92,7 @@ class ChoferController extends AppBaseController
         $chofer = $this->choferRepository->find($id);
 
         if (empty($chofer)) {
-            Flash::error('Chofer not found');
+            Alert::info('Registro no encontrado', 'No existe el chofer');
 
             return redirect(route('chofers.index'));
         }
@@ -114,15 +114,35 @@ class ChoferController extends AppBaseController
         $chofer = $this->choferRepository->find($id);
 
         if (empty($chofer)) {
-            Flash::error('Chofer not found');
+            Alert::info('Registro no encontrado', 'No existe el chofer');
 
             return redirect(route('chofers.index'));
         }
 
-        $this->choferRepository->delete($id);
+        //chequear si existen dependencias en cuyo caso no se puede eliminar
 
-        Alert::success('Operación realizada con éxito', 'Chofer eliminado satisfactoriamente');
-
+        $vehiculo = $chofer->vehiculo;
+        if (!is_null($vehiculo))
+        {
+            if ($vehiculo->count() > 0)
+                {
+                    Alert::warning('No se puede eliminar', 'Existe vehículo asociado');
+                }
+        }
+        elseif (!is_null($chofer->licenciaconduc))
+        {
+            if ($chofer->licenciaconduc->count() > 0)
+                    {
+                        Alert::warning('No se puede eliminar', 'Existe licencia de conducción asociada');
+                    }
+        }
+                
+        else
+        {
+            $this->choferRepository->delete($id);
+            Alert::success('Operación realizada con éxito', 'Chofer eliminado satisfactoriamente');
+        }
+        
         return redirect(route('chofers.index'));
     }
 }

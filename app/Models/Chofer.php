@@ -25,7 +25,7 @@ class Chofer extends Model
     public static $rules = [
         'nombre' => 'required',
         'apellidos' => 'required',
-        'ci' => 'required'
+        'ci' => 'required|min:11|max:11'
     ];
 
     /**

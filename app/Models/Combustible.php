@@ -33,7 +33,7 @@ class Combustible extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function ctrlcombustibles(): HasMany
+    public function ctrlcombustibles()
     {
         return $this->hasMany(Ctrlcombustible::class, 'combustible_id', 'id');
     }

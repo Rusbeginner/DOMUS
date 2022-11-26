@@ -119,9 +119,19 @@ class CombustibleController extends AppBaseController
             return redirect(route('combustibles.index'));
         }
 
-        $this->combustibleRepository->delete($id);
-
-        Alert::success('Operación realizada con éxito', 'Combustible eliminado satisfactoriamente');
+        if ($combustible->Tarjetamagneticas->count() > 0)
+        {
+            Alert::warning('No se puede eliminar', 'Existe tarjeta magnética asociada');
+        }
+        elseif ($combustible->ctrlcombustibles->count() > 0)
+        {
+            Alert::warning('No se puede eliminar', 'Existe control de combustible asociado');
+        }
+        else
+        {
+            $this->combustibleRepository->delete($id);
+            Alert::success('Operación realizada con éxito', 'Combustible eliminado satisfactoriamente');
+        }
 
         return redirect(route('combustibles.index'));
     }

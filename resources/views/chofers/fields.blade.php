@@ -19,5 +19,5 @@
 <!-- Ci Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('ci', 'CI:') !!}
-    {!! Form::text('ci', null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::number('ci', null, ['class' => 'form-control', 'required']) !!}
 </div>

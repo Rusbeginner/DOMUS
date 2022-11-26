@@ -67,7 +67,7 @@ class VehiculoController extends AppBaseController
         $vehiculo = $this->vehiculoRepository->find($id);
 
         if (empty($vehiculo)) {
-            Flash::error('Vehículo no encontrado');
+            Alert::info('Registro no encontrado', 'No existe el vehículo');
 
             return redirect(route('vehiculos.index'));
         }
@@ -99,7 +99,7 @@ class VehiculoController extends AppBaseController
         $vehiculo = $this->vehiculoRepository->find($id);
 
         if (empty($vehiculo)) {
-            Flash::error('Vehículo no encontrado');
+            Alert::info('Registro no encontrado', 'No existe el vehículo');
 
             return redirect(route('vehiculos.index'));
         }
@@ -115,7 +115,7 @@ class VehiculoController extends AppBaseController
         $vehiculo = $this->vehiculoRepository->find($id);
 
         if (empty($vehiculo)) {
-            Flash::error('Vehículo no encontrado');
+            Alert::info('Registro no encontrado', 'No existe el vehículo');
 
             return redirect(route('vehiculos.index'));
         }
@@ -137,14 +137,37 @@ class VehiculoController extends AppBaseController
         $vehiculo = $this->vehiculoRepository->find($id);
 
         if (empty($vehiculo)) {
-            Flash::error('Vehículo no encontrado');
+            Alert::info('Registro no encontrado', 'No existe el vehículo');
 
             return redirect(route('vehiculos.index'));
         }
 
-        $this->vehiculoRepository->delete($id);
+        //chequear si tiene dependencias asociadas en cuyo caso no se puede eliminar
 
-        Flash::success('Vehiculo eliminado satisfactoriamente.');
+        $licenciasop = $vehiculo->crtlicenciaoperativas;
+        if ($licenciasop->count() > 0)
+        {
+            Alert::warning('No se puede eliminar', 'Existe licencia operativa asociada');
+        }
+        elseif ($vehiculo->aslubricantes->count() > 0)
+        {
+            Alert::warning('No se puede eliminar', 'Existe asignación de lubricante asociada');
+        }
+        elseif ($vehiculo->ctrlcombustibles->count() > 0)
+        {
+            Alert::warning('No se puede eliminar', 'Existe asignación de combustible asociada');
+        }
+        elseif ($vehiculo->ctrlicenciacircs->count() > 0)
+        {
+            Alert::warning('No se puede eliminar', 'Existe licencia de circulación asociada');
+        }
+        else
+        {
+            $this->vehiculoRepository->delete($id);
+            Alert::success('Operación realizada con éxito', 'Vehículo eliminado satisfactoriamente');
+        }
+
+        
 
         return redirect(route('vehiculos.index'));
     }

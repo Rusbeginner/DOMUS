@@ -8,7 +8,7 @@ use App\Http\Requests\UpdateTipoequipoRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Repositories\TipoequipoRepository;
 use Illuminate\Http\Request;
-use Flash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TipoequipoController extends AppBaseController
 {
@@ -46,7 +46,7 @@ class TipoequipoController extends AppBaseController
 
         $tipoequipo = $this->tipoequipoRepository->create($input);
 
-        Flash::success('Tipoequipo saved successfully.');
+        Alert::success('Operación realizada con éxito', 'Tipo de vehículo agregado satisfactoriamente');
 
         return redirect(route('tipoequipos.index'));
     }
@@ -59,7 +59,7 @@ class TipoequipoController extends AppBaseController
         $tipoequipo = $this->tipoequipoRepository->find($id);
 
         if (empty($tipoequipo)) {
-            Flash::error('Tipoequipo not found');
+            Alert::info('Registro no encontrado', 'No existe el tipo de vehículo');
 
             return redirect(route('tipoequipos.index'));
         }
@@ -75,7 +75,7 @@ class TipoequipoController extends AppBaseController
         $tipoequipo = $this->tipoequipoRepository->find($id);
 
         if (empty($tipoequipo)) {
-            Flash::error('Tipoequipo not found');
+            Alert::info('Registro no encontrado', 'No existe el tipo de vehículo');
 
             return redirect(route('tipoequipos.index'));
         }
@@ -91,14 +91,14 @@ class TipoequipoController extends AppBaseController
         $tipoequipo = $this->tipoequipoRepository->find($id);
 
         if (empty($tipoequipo)) {
-            Flash::error('Tipoequipo not found');
+            Alert::info('Registro no encontrado', 'No existe el tipo de vehículo');
 
             return redirect(route('tipoequipos.index'));
         }
 
         $tipoequipo = $this->tipoequipoRepository->update($request->all(), $id);
 
-        Flash::success('Tipoequipo updated successfully.');
+        Alert::success('Operación realizada con éxito', 'Tipo de vehículo modificado satisfactoriamente');
 
         return redirect(route('tipoequipos.index'));
     }
@@ -113,14 +113,24 @@ class TipoequipoController extends AppBaseController
         $tipoequipo = $this->tipoequipoRepository->find($id);
 
         if (empty($tipoequipo)) {
-            Flash::error('Tipoequipo not found');
+            Alert::info('Registro no encontrado', 'No existe el tipo de vehículo');
 
             return redirect(route('tipoequipos.index'));
         }
 
-        $this->tipoequipoRepository->delete($id);
+        //chequear si existe vehiculo asociado
 
-        Flash::success('Tipoequipo deleted successfully.');
+        $vehiculos = $tipoequipo->vehiculos;
+
+        if($vehiculos->count() > 0)
+        {
+            Alert::warning('No se puede eliminar', 'Existe vehículo asociado');
+        }
+        else
+        {
+            $this->tipoequipoRepository->delete($id);
+            Alert::success('Operación realizada con éxito', 'Tipo de vehículo eliminado satisfactoriamente');
+        }
 
         return redirect(route('tipoequipos.index'));
     }

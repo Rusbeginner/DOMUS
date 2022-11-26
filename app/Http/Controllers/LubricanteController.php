@@ -62,7 +62,7 @@ class LubricanteController extends AppBaseController
         $lubricante = $this->lubricanteRepository->find($id);
 
         if (empty($lubricante)) {
-            Flash::error('Lubricante not found');
+            Alert::info('Registro no encontrado', 'No existe el lubricante');
 
             return redirect(route('lubricantes.index'));
         }
@@ -80,7 +80,7 @@ class LubricanteController extends AppBaseController
         $lubricante = $this->lubricanteRepository->find($id);
 
         if (empty($lubricante)) {
-            Flash::error('Lubricante not found');
+            Alert::info('Registro no encontrado', 'No existe el lubricante');
 
             return redirect(route('lubricantes.index'));
         }
@@ -96,17 +96,14 @@ class LubricanteController extends AppBaseController
         $lubricante = $this->lubricanteRepository->find($id);
 
         if (empty($lubricante)) {
-            Flash::error('Lubricante not found');
+            Alert::info('Registro no encontrado', 'No existe el lubricante');
 
             return redirect(route('lubricantes.index'));
         }
 
         $lubricante = $this->lubricanteRepository->update($request->all(), $id);
 
-// example:
         Alert::success('Operación realizada con éxito', 'Lubricante modificado satisfactoriamente');
-
-
         return redirect(route('lubricantes.index'));
     }
 
@@ -119,18 +116,24 @@ class LubricanteController extends AppBaseController
     {
         $lubricante = $this->lubricanteRepository->find($id);
 
-        if (empty($lubricante)) {
-            Flash::error('Lubricante not found');
-
+        if (empty($lubricante))
+        {
+            Alert::info('Registro no encontrado', 'No existe el lubricante');
             return redirect(route('lubricantes.index'));
         }
 
-        alert()->question('Está seguro de querer eliminar?','No se podrá revertir la operación')
-                ->showConfirmButton('Eliminar', '#3085d6')
-                ->showCancelButton('Cancelar', '#aaa')->reverseButtons();
+        //Chequear si tiene alguna asignacion , en ese caso no se puede eliminar
+        $asignaciones = $lubricante->aslubricantes;
 
-
-        //$this->lubricanteRepository->delete($id);
+        if ($asignaciones->count() > 0)
+        {
+            Alert::warning('No se puede eliminar', 'Existe asignación asociada');
+        }
+        else
+        {
+            $this->lubricanteRepository->delete($id);
+            Alert::success('Operación realizada con éxito', 'Lubricante eliminado satisfactoriamente');
+        }
 
         return redirect(route('lubricantes.index'));
     }

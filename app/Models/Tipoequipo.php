@@ -27,7 +27,7 @@ class Tipoequipo extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function vehiculos(): HasMany
+    public function vehiculos()
     {
         return $this->hasMany(Vehiculo::class,'tipoequipo_id', 'id');
     }

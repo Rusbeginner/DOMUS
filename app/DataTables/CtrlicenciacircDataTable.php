@@ -79,7 +79,11 @@ class CtrlicenciacircDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id',
+            'id' => new \Yajra\DataTables\Html\Column([
+                'title' => 'No.',
+                'data' => 'id',
+                'name' => 'id'
+            ]),
             'vehiculo_id' => new \Yajra\DataTables\Html\Column([
                 'title' => 'Vehículo(chapa)',
                 'data' => 'vehiculo.chapa',

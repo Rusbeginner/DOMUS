@@ -41,7 +41,7 @@ class Lubricante extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function aslubricantes(): HasMany
+    public function aslubricantes()
     {
         return $this->hasMany(Aslubricante::class, 'lubricante_id', 'id');
     }
